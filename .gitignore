@@ -130,6 +130,12 @@ dmypy.json
 *~
 .DS_Store
 
+# PlatformIO (ESP32 firmware)
+.pio/
+.platformio/
+firmware/**/.pio/
+firmware/**/.platformio/
+
 # Project specific
 data/*.txt
 data/*.csv

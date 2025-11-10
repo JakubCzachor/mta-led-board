@@ -20,11 +20,11 @@ Real-time NYC Subway visualization on a physical LED map. This Python applicatio
 
 ```
 project/
-├─ data/
-│  ├─ stops.txt              # MTA GTFS static stops
-│  ├─ stations.csv           # Station complex mappings
-│  └─ default_layout.csv     # LED index assignments
 ├─ python/
+│  ├─ data/
+│  │  ├─ stops.txt           # MTA GTFS static stops
+│  │  ├─ stations.csv        # Station complex mappings
+│  │  └─ default_layout.csv  # LED index assignments
 │  └─ src/
 │     ├─ app.py              # CLI entrypoint
 │     ├─ config.py           # Configuration (feeds, timings)
@@ -65,14 +65,14 @@ source .venv/bin/activate
 
 # Install dependencies
 
-pip install pandas numpy gtfs-realtime-bindings requests httpx pyserial
+pip install -r requirements.txt
 ```
 
 ## Quick Start
 
 **Test mode** (no hardware required):
 ```bash
-python -m python.src.app --layout data/default_layout.csv --test
+python -m python.src.app --layout python/data/default_layout.csv --test
 ```
 
 Example output:
@@ -97,7 +97,7 @@ polled in 60.8 ms | occupied=275 | solid=6 blink=0 pulse=6
    ```
 4. **Run:**
    ```bash
-   python -m python.src.app --layout data/default_layout.csv --serial-port COM5
+   python -m python.src.app --layout python/data/default_layout.csv --serial-port COM5
    ```
 
 ## Configuration
@@ -180,7 +180,7 @@ python -m python.src.app [options]
 ```
 
 **Options:**
-- `--layout PATH` Layout CSV file (default: `data/default_layout.csv`)
+- `--layout PATH` Layout CSV file (default: `python/data/default_layout.csv`)
 - `--test` Test mode (console output instead of serial)
 - `--serial-port PORT` Serial port for ESP32 (e.g., `COM5`, `/dev/ttyUSB0`)
 - `--baud RATE` Baud rate (default: 2000000)
@@ -209,7 +209,7 @@ python -m python.src.app --test --no-httpx
 - Inject power every 50-75 LEDs with appropriate gauge wire
 
 **Layout customization:**
-- Edit `data/default_layout.csv` to exclude regions (e.g., Staten Island, far-north Bronx)
+- Edit `python/data/default_layout.csv` to exclude regions (e.g., Staten Island, far-north Bronx)
 - Supports both 8mm and 12mm LED strips
 
 ---
