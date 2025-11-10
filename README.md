@@ -58,14 +58,14 @@ python -m venv .venv
 # source .venv/bin/activate
 
 pip install --upgrade pip
-pip install pandas numpy protobuf requests httpx pyserial
+pip install pandas numpy gtfs-realtime-bindings requests httpx pyserial
 ```
 
 ---
 
 ### First Run (TEST MODE)
 ```bash
-python -m src.app --layout data/default_layout.csv --mode test
+python -m src.app --test
 ```
 Output:
 ```yaml
@@ -88,12 +88,9 @@ polled in 60.8 ms | occupied=275 | solid=6 blink=0 pulse=6
     - Windows: COM5 (check Device Manager)
     - macOS: /dev/tty.usbserial-*
     - Linux: /dev/ttyUSB0 or /dev/ttyACM0
-3. Edit src/config.py:
-    - SERIAL_PORT = "COM5"
-    - BAUD = 115200
-4. Run:
+3. Run:
 ```bash
-python -m src.app --layout data/default_layout.csv --mode serial
+python -m src.app --serial-port COM5 --baud 115200
 ```
 
 ---
@@ -220,23 +217,30 @@ python -m src.app [options]
 ```
 
 **Options**
-- `--layout PATH` Layout CSV (default: `data/default_layout.csv`)
-- `--mode {test,serial}` `test`=console preview, `serial`=USB to ESP32
-- `--backend {async,threads}` `async` (HTTP/2, httpx) or `threads` (requests)
-- `--poll-ms INT` Poll cadence in ms (default from config)
-- `--one-shot` Fetch once and exit
-- `--verbose` Extra logs
+- `--layout PATH` Layout CSV file (default: `data/default_layout.csv`)
+- `--test` Test mode (console preview)
+- `--serial-port PORT` — Serial port for ESP32
+- `--baud RATE` — Baud rate (default: 2000000)
+- `--poll SECONDS` — Poll interval in seconds (default: 1.0)
+- `--httpx` Use httpx with HTTP/2 (default)
+- `--no-httpx` Use requests with HTTP/1.1
+- `--stations PATH` — Stations CSV file (default: `data/stations.csv`)
+- `--stops PATH` — Stops TXT file (default: `data/stops.txt`) Enable verbose logging
+- `--verbose` (Already listed above)
 
 **Examples**
 ```bash
-Fastest, HTTP/2 asyncio:
-python -m src.app --mode test --backend async
+# Test mode with verbose logging
+python -m src.app --test --verbose
 
-Serial to ESP32, every 500 ms:
-python -m src.app --mode serial --backend async --poll-ms 500
+# Hardware mode with custom serial port
+python -m src.app --serial-port COM5 --baud 115200
 
-One-shot snapshot (debug):
-python -m src.app --one-shot --mode test
+# Custom poll interval (every 0.5 seconds)
+python -m src.app --test --poll 0.5
+
+# Use HTTP/1.1 fallback instead of HTTP/2
+python -m src.app --test --no-httpx
 ```
 ---
 

@@ -1,4 +1,5 @@
 import os
+from enum import IntEnum
 
 # Feed list
 FEEDS = [
@@ -11,6 +12,7 @@ FEEDS = [
     "https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fgtfs",  # 1/2/3/4/5/6/7/S
 ]
 
+# API key is optional (MTA feeds work without authentication)
 API_KEY = os.getenv("MTA_API_KEY")
 
 # Timeouts
@@ -18,7 +20,14 @@ TIMEOUT_CONNECT = 1.5
 TIMEOUT_READ = 4.0
 
 # LED modes
-MODE_OFF   = 0
-MODE_SOLID = 1
-MODE_BLINK = 2
-MODE_PULSE = 3
+class LEDMode(IntEnum):
+    OFF = 0
+    SOLID = 1
+    BLINK = 2
+    PULSE = 3
+
+# Legacy constants for backward compatibility
+MODE_OFF = LEDMode.OFF
+MODE_SOLID = LEDMode.SOLID
+MODE_BLINK = LEDMode.BLINK
+MODE_PULSE = LEDMode.PULSE
