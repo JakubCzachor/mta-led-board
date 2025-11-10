@@ -55,6 +55,7 @@ python -m venv .venv
 source .venv/bin/activate
 
 # Install dependencies
+
 pip install pandas numpy gtfs-realtime-bindings requests httpx pyserial
 ```
 
