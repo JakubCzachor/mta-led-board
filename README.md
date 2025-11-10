@@ -1,261 +1,194 @@
-# MTA LED Board — README
+# MTA LED Board
 
-A fast Python app that lights a physical LED map of the NYC Subway using GTFS-realtime. It fetches vehicle positions in parallel, maps them to station complexes, assigns route colors (with “sticky” persistence to prevent flicker), and streams compact frames to an ESP32 over USB serial. A **TEST MODE** prints a readable preview if you don’t have hardware connected.
+Real-time NYC Subway visualization on a physical LED map. This Python application fetches live train positions via GTFS-realtime, maps them to station complexes, and displays route colors on an LED strip controlled by an ESP32. Features include parallel data fetching, anti-flicker sticky states, and a test mode for hardware-free development.
 
 ---
 
 ## Features
 
-- **Parallel HTTP + protobuf parsing** (threaded or asyncio)
-- **Station→Complex mapping** (handles `N/S` stop suffixes, parents, and complex IDs)
-- **Route color priority** (letter lines prioritized when mixed)
-- **Sticky states** (hold/pulse/blink windows to reduce flicker)
-- **Layout-driven rendering** (choose which stations to include; skip Staten Island or far-north Bronx by editing one CSV)
-- **Hardware or Test Mode** (serial frames to ESP32 or console preview)
-- **8 mm *or* 12 mm pixel support** (layout file defines LED positions; the code is agnostic)
+- **Parallel data fetching** — Async HTTP/2 or threaded requests with protobuf parsing
+- **Smart station mapping** — Handles complex IDs, stop suffixes, and parent stations
+- **Route color priority** — Configurable precedence for mixed-route stations
+- **Anti-flicker states** — Sticky hold/pulse/blink timing reduces LED jitter
+- **CSV-driven layout** — Easily customize which stations to display
+- **Dual-mode operation** — USB serial output to ESP32 or console test preview
+- **Flexible LED support** — Works with 8mm or 12mm pixel strips
 
 ---
 
-## Folder Layout
+## Project Structure
 
+```
 project/
 ├─ data/
-│ ├─ stops.txt # GTFS stops file (MTA static)
-│ ├─ stations.csv # MTA complex mapping (data.gov)
-│ ├─ default_layout.csv # Station → LED index/coords you want to light
-│ └─ layout_with_names.csv # (optional) helper export
+│  ├─ stops.txt              # MTA GTFS static stops
+│  ├─ stations.csv           # Station complex mappings
+│  └─ default_layout.csv     # LED index assignments
 └─ src/
-├─ app.py # CLI entrypoint
-├─ config.py # Feeds, API key, timings, serial port, behavior flags
-├─ fetch_async.py # HTTP/2 asyncio fetch+parse (fastest)
-├─ fetch_threads.py # ThreadPool + requests fallback
-├─ mapping.py # Stop/complex merging, name picking, route colors
-├─ parsing.py # GTFS entity parsing → station states
-├─ render.py # Sticky/blink/pulse + layout → frame bytes
-└─ serial_frame.py # USB message format (framing, checksum)
-
-
-> Keep the `data/` directory at project root **next to** `src/`.
+   ├─ app.py                 # CLI entrypoint
+   ├─ config.py              # Configuration (feeds, timings, serial port)
+   ├─ fetch_async.py         # HTTP/2 async fetcher
+   ├─ fetch_threads.py       # Threaded fallback fetcher
+   ├─ mapping.py             # Station/complex mapping logic
+   ├─ parsing.py             # GTFS protobuf parser
+   ├─ render.py              # Frame rendering with state machine
+   └─ serial_frame.py        # Binary protocol encoder
+```
 
 ---
 
-## Prerequisites
+## Installation
 
-- Python **3.10+** (Windows/macOS/Linux)
-- Pip v23+
-- (Optional) ESP32 on COM/tty for hardware mode
+**Requirements:**
+- Python 3.10+
+- ESP32 microcontroller (optional, for hardware mode)
 
----
-
-### Install
+**Setup:**
 
 ```bash
-# from project root (the folder containing /src and /data)
+# Create virtual environment
 python -m venv .venv
-# Windows PowerShell:
-. .venv/Scripts/Activate.ps1
-# macOS/Linux:
-# source .venv/bin/activate
 
-pip install --upgrade pip
+# Activate (Windows)
+.venv\Scripts\activate
+# Activate (macOS/Linux)
+source .venv/bin/activate
+
+# Install dependencies
 pip install pandas numpy gtfs-realtime-bindings requests httpx pyserial
 ```
 
----
+## Quick Start
 
-### First Run (TEST MODE)
+**Test mode** (no hardware required):
 ```bash
-python -m src.app --test
+python -m src.app --layout data/default_layout.csv --test
 ```
-Output:
-```yaml
+
+Example output:
+```
 TEST MODE — LED preview
 polled in 60.8 ms | occupied=275 | solid=6 blink=0 pulse=6
   SOLID : 14 St-Union Sq, 34 St-Herald Sq, ...
   PULSE : Grand Central-42 St, Queensboro Plaza, ...
 ```
 
----
+**Hardware mode** (with ESP32):
 
-### Hardware Mode (ESP32 over USB)
+1. **Flash ESP32** with firmware that reads serial frames at 115200 baud and drives LEDs (FastLED/NeoPixel)
+2. **Find serial port:**
+   - Windows: `COM5` (Device Manager)
+   - macOS: `/dev/tty.usbserial-*`
+   - Linux: `/dev/ttyUSB0` or `/dev/ttyACM0`
+3. **Configure** [src/config.py](src/config.py):
+   ```python
+   SERIAL_PORT = "COM5"
+   BAUD = 115200
+   ```
+4. **Run:**
+   ```bash
+   python -m src.app --layout data/default_layout.csv --serial-port COM5
+   ```
 
-1. Flash ESP32 with a sketch that:
-    - Opens Serial 115200.
-    - Reads framed messages (see Serial Frame Format).
-    - For each station payload: set pixel color and animation (solid/blink/pulse).
-    - Renders with FastLED/NeoPixel.
-2. Find USB port:
-    - Windows: COM5 (check Device Manager)
-    - macOS: /dev/tty.usbserial-*
-    - Linux: /dev/ttyUSB0 or /dev/ttyACM0
-3. Run:
-```bash
-python -m src.app --serial-port COM5 --baud 115200
+## Configuration
+
+Edit [src/config.py](src/config.py) to customize behavior:
+
+**Data sources:**
+```python
+FEEDS = [...]  # MTA GTFS-realtime feed URLs (A/C/E, B/D/F/M, etc.)
+HTTP_TIMEOUT = (1.5, 4.0)  # Connection and read timeout
 ```
 
----
+**Timing:**
+```python
+POLL_MS = 500        # Refresh rate in milliseconds
+HOLD_TICKS = 3       # Frames to hold color after train leaves
+PULSE_TICKS = 2      # Frames to pulse on departure
+BLINK_TICKS = 2      # Frames to blink on arrival
+```
 
-### Configuration (edit src/config.py)
-# Feeds (GTFS-realtime)
-FEEDS = [
-    "https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fgtfs-ace",
-    "https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fgtfs-bdfm",
-    "https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fgtfs-g",
-    "https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fgtfs-jz",
-    "https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fgtfs-nqrw",
-    "https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fgtfs-l",
-    "https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fgtfs",  # 1/2/3/4/5/6/7/S
-]
+**Display:**
+```python
+PRIORITIZE_LETTER_LINES = True  # Letter routes win over numbers
+BRIGHTNESS = 255                # LED brightness (0-255)
+```
 
-HTTP_TIMEOUT = (1.5, 4.0)       # connect, read
-POLL_MS = 500                   # poll cadence (ms)
+### Route Colors
 
-# Sticky/animation windows (in ticks = polls)
-HOLD_TICKS  = 3     # keep last solid color if briefly idle
-PULSE_TICKS = 2     # polls to “pulse” on DEPARTING
-BLINK_TICKS = 2     # polls to “blink” on INCOMING
+MTA route colors (defined in [src/colors.py](src/colors.py)):
+- **A/C/E** — Blue
+- **B/D/F/M** — Orange
+- **N/Q/R/W** — Yellow
+- **1/2/3** — Red
+- **4/5/6** — Green
+- **7** — Purple
+- **S** — Gray
 
-# Rendering
-PRIORITIZE_LETTER_LINES = True  # prefer A/C/E/B/D/F/M/N/Q/R/W over number lines
-BRIGHTNESS = 255                # lower if power limited
+When multiple routes occupy the same station, letter lines take precedence (if `PRIORITIZE_LETTER_LINES=True`).
 
-# Serial
-SERIAL_PORT = "COM5"            # Windows example
-BAUD = 115200
+### LED States
 
-# Colors & Priority
+Each poll cycle assigns one of four states to each station:
+- **SOLID** — Train stopped at station (or held briefly after departure)
+- **BLINK** — Train arriving (first appearance)
+- **PULSE** — Train departing (just left)
+- **OFF** — No train present
 
-Approx MTA branding:
+## Serial Protocol
 
-- **A/C/E** — blue  
-- **B/D/F/M** — orange  
-- **N/Q/R/W** — yellow  
-- **1/2/3** — red  
-- **4/5/6** — green  
-- **7** — purple  
-- **S** — gray
+Binary frame format sent to ESP32:
 
-**Multiple routes at one complex (same poll):**
-- If `PRIORITIZE_LETTER_LINES=True`, **letter lines win** over number lines.
-- Otherwise, a **stable tie-break** by route code is used.
-- Mapping lives in `src/colors.py`.
+```
+[0xAA 0x55]           # Frame header
+[u16 count]           # Number of LED updates (little-endian)
+# Repeat 'count' times:
+  [u16 led_index]     # LED position
+  [u8 state]          # 0=OFF, 1=SOLID, 2=BLINK, 3=PULSE
+  [u8 r][u8 g][u8 b]  # RGB color (0-255)
+[u8 checksum]         # Sum of all bytes mod 256
+```
 
----
+**ESP32 firmware should:**
+1. Sync to `0xAA 0x55` header
+2. Read count and payloads
+3. Verify checksum
+4. Update LED buffer and animate locally
 
-# States (solid / incoming / departing)
-
-Per poll we classify each station:
-
-- **SOLID** — at least one train `STOPPED_AT` (or still within `HOLD_TICKS` grace).
-- **INCOMING** — first seen after being absent last tick → **blink** for `BLINK_TICKS`.
-- **DEPARTING** — was stopped last tick, now gone → **pulse** for `PULSE_TICKS`.
-- **IDLE** — no train; off unless still inside `HOLD_TICKS`.
-
-**Example (TEST mode):**
-
-
-# Colors & Priority
-
-Approx MTA branding:
-
-- **A/C/E** — blue  
-- **B/D/F/M** — orange  
-- **N/Q/R/W** — yellow  
-- **1/2/3** — red  
-- **4/5/6** — green  
-- **7** — purple  
-- **S** — gray
-
-**Multiple routes at one complex (same poll):**
-- If `PRIORITIZE_LETTER_LINES=True`, **letter lines win** over number lines.
-- Otherwise, a **stable tie-break** by route code is used.
-- Mapping lives in `src/colors.py`.
-
----
-
-# States (solid / incoming / departing)
-
-Per poll we classify each station:
-
-- **SOLID** — at least one train `STOPPED_AT` (or still within `HOLD_TICKS` grace).
-- **INCOMING** — first seen after being absent last tick → **blink** for `BLINK_TICKS`.
-- **DEPARTING** — was stopped last tick, now gone → **pulse** for `PULSE_TICKS`.
-- **IDLE** — no train; off unless still inside `HOLD_TICKS`.
-
-**Example (TEST mode):**
-polled in 62.4 ms | occupied=275 | solid=6 blink=0 pulse=6
-
-
-Small `SOLID` counts are normal off-peak; `PULSE` often appears right after a departure.
-
----
-
-# Serial Frame Format (PC → ESP32)
-
-Binary message per tick:
-
-[0xAA 0x55] # header
-[u16 count] # number of station payloads (LE)
-repeat count times:
-    [u16 led_index] # target LED
-    [u8 state] # 0=OFF, 1=SOLID, 2=BLINK, 3=PULSE
-    [u8 r][u8 g][u8 b] # color 0..255
-[u8 checksum] # sum of all bytes mod 256 (including header)
-
-
-**ESP32 steps:**
-1. Find `0xAA 0x55`.  
-2. Read `count`, then `count` payloads.  
-3. Verify checksum.  
-4. Update LED buffer; perform **blink/pulse locally** for smooth animation.
-
----
-
-# CLI
+## CLI Usage
 ```bash
 python -m src.app [options]
 ```
 
-**Options**
+**Options:**
 - `--layout PATH` Layout CSV file (default: `data/default_layout.csv`)
-- `--test` Test mode (console preview)
-- `--serial-port PORT` — Serial port for ESP32
-- `--baud RATE` — Baud rate (default: 2000000)
-- `--poll SECONDS` — Poll interval in seconds (default: 1.0)
-- `--httpx` Use httpx with HTTP/2 (default)
-- `--no-httpx` Use requests with HTTP/1.1
-- `--stations PATH` — Stations CSV file (default: `data/stations.csv`)
-- `--stops PATH` — Stops TXT file (default: `data/stops.txt`) Enable verbose logging
-- `--verbose` (Already listed above)
+- `--test` Test mode (console output instead of serial)
+- `--serial-port PORT` Serial port for ESP32 (e.g., `COM5`, `/dev/ttyUSB0`)
+- `--baud RATE` Baud rate (default: 2000000)
+- `--httpx` Use httpx backend with HTTP/2 (default)
+- `--no-httpx` Use requests backend with HTTP/1.1 (fallback)
+- `--poll SECONDS` Poll interval in seconds (default: 1.0)
+- `--verbose` Enable detailed logging
 
-**Examples**
+**Examples:**
 ```bash
-# Test mode with verbose logging
+# Test mode with HTTP/2 (default)
 python -m src.app --test --verbose
 
-# Hardware mode with custom serial port
-python -m src.app --serial-port COM5 --baud 115200
+# Hardware mode with 0.5s refresh
+python -m src.app --serial-port COM5 --poll 0.5
 
-# Custom poll interval (every 0.5 seconds)
-python -m src.app --test --poll 0.5
-
-# Use HTTP/1.1 fallback instead of HTTP/2
+# Use HTTP/1.1 fallback
 python -m src.app --test --no-httpx
 ```
----
 
-# Power & LED Notes
+## Hardware Considerations
 
-- **12 mm** bullet pixels can draw **~60 mA** each at 5 V on full white.  
-  450 LEDs worst-case ≈ **27 A**. Real usage is lower (route colors, partial on).
-- Inject power every **50–75** nodes and use adequate wire gauge + fusing.
-- **8 mm** nodes work identically; just ensure your **layout CSV** reflects the physical order and count.
+**Power requirements:**
+- 12mm pixels: ~60mA each at full brightness (5V)
+- 450 LEDs max draw: ~27A (real-world usage is lower)
+- Inject power every 50-75 LEDs with appropriate gauge wire
 
----
-
-# Excluding Regions (e.g., far-north Bronx)
-
-Do this via the **layout CSV**. To trim, remove those rows.  
-(If you want an auto-trim script by latitude/borough, open an issue and we’ll include it.)
-
----
+**Layout customization:**
+- Edit `data/default_layout.csv` to exclude regions (e.g., Staten Island, far-north Bronx)
+- Supports both 8mm and 12mm LED strips
