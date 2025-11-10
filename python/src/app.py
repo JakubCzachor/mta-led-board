@@ -24,9 +24,9 @@ logger = logging.getLogger(__name__)
 
 def main():
     ap = argparse.ArgumentParser(description="MTA LED Board - Real-time NYC Subway visualization")
-    ap.add_argument("--stations", default="data/stations.csv", help="Path to stations.csv")
-    ap.add_argument("--stops", default="data/stops.txt", help="Path to stops.txt")
-    ap.add_argument("--layout", default="data/default_layout.csv", help="Path to layout CSV")
+    ap.add_argument("--stations", default="python/data/stations.csv", help="Path to stations.csv")
+    ap.add_argument("--stops", default="python/data/stops.txt", help="Path to stops.txt")
+    ap.add_argument("--layout", default="python/data/default_layout.csv", help="Path to layout CSV")
     ap.add_argument("--test", action="store_true", help="Test mode (console output)")
     ap.add_argument("--serial-port", default=None, help="Serial port for ESP32")
     ap.add_argument("--baud", type=int, default=2_000_000, help="Baud rate")

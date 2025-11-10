@@ -1,0 +1,13 @@
+# Core dependencies
+pandas>=2.0.0
+numpy>=1.24.0
+
+# GTFS realtime protocol buffers
+gtfs-realtime-bindings>=1.0.0
+
+# HTTP clients
+requests>=2.31.0
+httpx>=0.24.0
+
+# Serial communication (for ESP32)
+pyserial>=3.5
