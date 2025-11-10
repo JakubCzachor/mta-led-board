@@ -55,14 +55,15 @@ python -m venv .venv
 source .venv/bin/activate
 
 # Install dependencies
-pip install pandas numpy protobuf requests httpx pyserial
+
+pip install pandas numpy gtfs-realtime-bindings requests httpx pyserial
 ```
 
 ## Quick Start
 
 **Test mode** (no hardware required):
 ```bash
-python -m src.app --layout data/default_layout.csv --mode test
+python -m src.app --layout data/default_layout.csv --test
 ```
 
 Example output:
@@ -87,7 +88,7 @@ polled in 60.8 ms | occupied=275 | solid=6 blink=0 pulse=6
    ```
 4. **Run:**
    ```bash
-   python -m src.app --layout data/default_layout.csv --mode serial
+   python -m src.app --layout data/default_layout.csv --serial-port COM5
    ```
 
 ## Configuration
@@ -162,22 +163,24 @@ python -m src.app [options]
 
 **Options:**
 - `--layout PATH` Layout CSV file (default: `data/default_layout.csv`)
-- `--mode {test,serial}` Output mode (console or ESP32)
-- `--backend {async,threads}` HTTP backend (`async` for HTTP/2, `threads` for fallback)
-- `--poll-ms INT` Polling interval in milliseconds
-- `--one-shot` Fetch once and exit (debugging)
-- `--verbose` Enable detailed logging
+- `--test` Test mode (console output instead of serial)
+- `--serial-port PORT` Serial port for ESP32 (e.g., `COM5`, `/dev/ttyUSB0`)
+- `--baud RATE` Baud rate (default: 2000000)
+- `--httpx` Use httpx backend with HTTP/2 (default)
+- `--no-httpx` Use requests backend with HTTP/1.1 (fallback)
+- `--poll SECONDS` Poll interval in seconds (default: 1.0)
+- `--verbose` Enable detailed logging
 
 **Examples:**
 ```bash
-# Test mode with async fetching
-python -m src.app --mode test --backend async
+# Test mode with HTTP/2 (default)
+python -m src.app --test --verbose
 
-# Hardware mode at 500ms refresh
-python -m src.app --mode serial --backend async --poll-ms 500
+# Hardware mode with 0.5s refresh
+python -m src.app --serial-port COM5 --poll 0.5
 
-# Single fetch for debugging
-python -m src.app --one-shot --mode test
+# Use HTTP/1.1 fallback
+python -m src.app --test --no-httpx
 ```
 
 ## Hardware Considerations
