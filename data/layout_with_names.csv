@@ -1,0 +1,425 @@
+station_key,led_index,display_name,Borough,Line
+CPLX_223,0,Lexington Av/63 St,M,63rd St
+CPLX_222,1,Roosevelt Island,M,63rd St
+CPLX_601,2,14 St,M,6th Av - Culver
+CPLX_232,3,2 Av,M,6th Av - Culver
+CPLX_228,4,23 St,M,6th Av - Culver
+CPLX_607,5,34 St-Herald Sq,M,6th Av - Culver
+CPLX_609,6,42 St-Bryant Pk,M,6th Av - Culver
+CPLX_225,7,47-50 Sts-Rockefeller Ctr,M,6th Av - Culver
+CPLX_224,8,57 St,M,6th Av - Culver
+CPLX_619,9,Broadway-Lafayette St,M,6th Av - Culver
+CPLX_625,10,Delancey St-Essex St,M,6th Av - Culver
+CPLX_234,11,East Broadway,M,6th Av - Culver
+CPLX_231,12,Grand St,M,6th Av - Culver
+CPLX_167,13,W 4 St-Wash Sq,M,6th Av - Culver
+CPLX_156,14,103 St,M,8th Av - Fulton St
+CPLX_154,15,116 St,M,8th Av - Fulton St
+CPLX_153,16,125 St,M,8th Av - Fulton St
+CPLX_152,17,135 St,M,8th Av - Fulton St
+CPLX_618,18,14 St,M,8th Av - Fulton St
+CPLX_151,19,145 St,M,8th Av - Fulton St
+CPLX_150,20,155 St,M,8th Av - Fulton St
+CPLX_149,21,163 St-Amsterdam Av,M,8th Av - Fulton St
+CPLX_605,22,168 St,M,8th Av - Fulton St
+CPLX_147,23,175 St,M,8th Av - Fulton St
+CPLX_146,24,181 St,M,8th Av - Fulton St
+CPLX_145,25,190 St,M,8th Av - Fulton St
+CPLX_165,26,23 St,M,8th Av - Fulton St
+CPLX_164,27,34 St-Penn Station,M,8th Av - Fulton St
+CPLX_611,28,42 St-Port Authority Bus Terminal,M,8th Av - Fulton St
+CPLX_162,29,50 St,M,8th Av - Fulton St
+CPLX_614,30,59 St-Columbus Circle,M,8th Av - Fulton St
+CPLX_160,31,72 St,M,8th Av - Fulton St
+CPLX_159,32,81 St-Museum of Natural History,M,8th Av - Fulton St
+CPLX_158,33,86 St,M,8th Av - Fulton St
+CPLX_157,34,96 St,M,8th Av - Fulton St
+CPLX_169,35,Canal St,M,8th Av - Fulton St
+CPLX_155,36,Cathedral Pkwy (110 St),M,8th Av - Fulton St
+CPLX_624,37,Chambers St,M,8th Av - Fulton St
+CPLX_144,38,Dyckman St,M,8th Av - Fulton St
+CPLX_628,39,Fulton St,M,8th Av - Fulton St
+CPLX_143,40,Inwood-207 St,M,8th Av - Fulton St
+CPLX_168,41,Spring St,M,8th Av - Fulton St
+CPLX_8,42,5 Av/59 St,M,Astoria
+CPLX_613,43,Lexington Av/59 St,M,Astoria
+CPLX_623,44,Canal St,M,Broadway
+CPLX_20,45,City Hall,M,Broadway
+CPLX_22,46,Rector St,M,Broadway
+CPLX_635,47,Whitehall St-South Ferry,M,Broadway
+CPLX_309,48,103 St,M,Broadway - 7Av
+CPLX_307,49,116 St-Columbia University,M,Broadway - 7Av
+CPLX_306,50,125 St,M,Broadway - 7Av
+CPLX_305,51,137 St-City College,M,Broadway - 7Av
+CPLX_304,52,145 St,M,Broadway - 7Av
+CPLX_303,53,157 St,M,Broadway - 7Av
+CPLX_321,54,18 St,M,Broadway - 7Av
+CPLX_301,55,181 St,M,Broadway - 7Av
+CPLX_300,56,191 St,M,Broadway - 7Av
+CPLX_298,57,207 St,M,Broadway - 7Av
+CPLX_297,58,215 St,M,Broadway - 7Av
+CPLX_320,59,23 St,M,Broadway - 7Av
+CPLX_319,60,28 St,M,Broadway - 7Av
+CPLX_318,61,34 St-Penn Station,M,Broadway - 7Av
+CPLX_316,62,50 St,M,Broadway - 7Av
+CPLX_314,63,66 St-Lincoln Center,M,Broadway - 7Av
+CPLX_313,64,72 St,M,Broadway - 7Av
+CPLX_312,65,79 St,M,Broadway - 7Av
+CPLX_311,66,86 St,M,Broadway - 7Av
+CPLX_310,67,96 St,M,Broadway - 7Av
+CPLX_325,68,Canal St,M,Broadway - 7Av
+CPLX_308,69,Cathedral Pkwy (110 St),M,Broadway - 7Av
+CPLX_327,70,Chambers St,M,Broadway - 7Av
+CPLX_323,71,Christopher St-Stonewall,M,Broadway - 7Av
+CPLX_299,72,Dyckman St,M,Broadway - 7Av
+CPLX_326,73,Franklin St,M,Broadway - 7Av
+CPLX_324,74,Houston St,M,Broadway - 7Av
+CPLX_296,75,Marble Hill-225 St,M,Broadway - 7Av
+CPLX_329,76,Rector St,M,Broadway - 7Av
+CPLX_328,77,WTC Cortlandt,M,Broadway - 7Av
+CPLX_602,78,14 St-Union Sq,M,Broadway - Brighton
+CPLX_14,79,23 St,M,Broadway - Brighton
+CPLX_13,80,28 St,M,Broadway - Brighton
+CPLX_10,81,49 St,M,Broadway - Brighton
+CPLX_9,82,57 St-7 Av,M,Broadway - Brighton
+CPLX_16,83,8 St-NYU,M,Broadway - Brighton
+CPLX_17,84,Prince St,M,Broadway - Brighton
+CPLX_119,85,1 Av,M,Canarsie
+CPLX_118,86,3 Av,M,Canarsie
+CPLX_333,87,Wall St,M,Clark St
+CPLX_220,88,155 St,M,Concourse
+CPLX_471,89,34 St-Hudson Yards,M,Flushing
+CPLX_610,90,Grand Central-42 St,M,Flushing
+CPLX_103,91,Bowery,M,Jamaica
+CPLX_107,92,Broad St,M,Jamaica
+CPLX_622,93,Chambers St,M,Jamaica
+CPLX_441,94,110 St-Malcolm X Plaza,M,Lenox - White Plains Rd
+CPLX_440,95,116 St,M,Lenox - White Plains Rd
+CPLX_439,96,125 St,M,Lenox - White Plains Rd
+CPLX_438,97,135 St,M,Lenox - White Plains Rd
+CPLX_437,98,145 St,M,Lenox - White Plains Rd
+CPLX_436,99,Harlem-148 St,M,Lenox - White Plains Rd
+CPLX_395,100,103 St,M,Lexington Av
+CPLX_394,101,110 St,M,Lexington Av
+CPLX_393,102,116 St,M,Lexington Av
+CPLX_392,103,125 St,M,Lexington Av
+CPLX_405,104,23 St-Baruch College,M,Lexington Av
+CPLX_404,105,28 St,M,Lexington Av
+CPLX_403,106,33 St,M,Lexington Av
+CPLX_612,107,51 St,M,Lexington Av
+CPLX_399,108,68 St-Hunter College,M,Lexington Av
+CPLX_398,109,77 St,M,Lexington Av
+CPLX_397,110,86 St,M,Lexington Av
+CPLX_396,111,96 St,M,Lexington Av
+CPLX_407,112,Astor Pl,M,Lexington Av
+CPLX_414,113,Bowling Green,M,Lexington Av
+CPLX_409,114,Spring St,M,Lexington Av
+CPLX_413,115,Wall St,M,Lexington Av
+CPLX_276,116,5 Av/53 St,M,Queens Blvd
+CPLX_277,117,7 Av,M,Queens Blvd
+CPLX_477,118,72 St,M,Second Av
+CPLX_476,119,86 St,M,Second Av
+CPLX_475,120,96 St,M,Second Av
+CPLX_31,121,25 St,Bk,4th Av
+CPLX_32,122,36 St,Bk,4th Av
+CPLX_608,123,4 Av-9 St,Bk,4th Av
+CPLX_33,124,45 St,Bk,4th Av
+CPLX_34,125,53 St,Bk,4th Av
+CPLX_35,126,59 St,Bk,4th Av
+CPLX_37,127,77 St,Bk,4th Av
+CPLX_38,128,86 St,Bk,4th Av
+CPLX_617,129,Atlantic Av-Barclays Ctr,Bk,4th Av
+CPLX_36,130,Bay Ridge Av,Bk,4th Av
+CPLX_39,131,Bay Ridge-95 St,Bk,4th Av
+CPLX_30,132,Prospect Av,Bk,4th Av
+CPLX_28,133,Union St,Bk,4th Av
+CPLX_241,134,15 St-Prospect Park,Bk,6th Av - Culver
+CPLX_245,135,18 Av,Bk,6th Av - Culver
+CPLX_240,136,7 Av,Bk,6th Av - Culver
+CPLX_246,137,Avenue I,Bk,6th Av - Culver
+CPLX_248,138,Avenue N,Bk,6th Av - Culver
+CPLX_249,139,Avenue P,Bk,6th Av - Culver
+CPLX_251,140,Avenue U,Bk,6th Av - Culver
+CPLX_252,141,Avenue X,Bk,6th Av - Culver
+CPLX_247,142,Bay Pkwy,Bk,6th Av - Culver
+CPLX_236,143,Bergen St,Bk,6th Av - Culver
+CPLX_237,144,Carroll St,Bk,6th Av - Culver
+CPLX_243,145,Church Av,Bk,6th Av - Culver
+CPLX_244,146,Ditmas Av,Bk,6th Av - Culver
+CPLX_242,147,Fort Hamilton Pkwy,Bk,6th Av - Culver
+CPLX_250,148,Kings Hwy,Bk,6th Av - Culver
+CPLX_253,149,Neptune Av,Bk,6th Av - Culver
+CPLX_238,150,Smith-9 Sts,Bk,6th Av - Culver
+CPLX_235,151,York St,Bk,6th Av - Culver
+CPLX_621,152,Broadway Junction,Bk,8th Av - Fulton St
+CPLX_177,153,Clinton-Washington Avs,Bk,8th Av - Fulton St
+CPLX_188,154,Euclid Av,Bk,8th Av - Fulton St
+CPLX_627,155,Franklin Av,Bk,8th Av - Fulton St
+CPLX_173,156,High St,Bk,8th Av - Fulton St
+CPLX_175,157,Hoyt-Schermerhorn Sts,Bk,8th Av - Fulton St
+CPLX_636,158,Jay St-MetroTech,Bk,8th Av - Fulton St
+CPLX_180,159,Kingston-Throop Avs,Bk,8th Av - Fulton St
+CPLX_176,160,Lafayette Av,Bk,8th Av - Fulton St
+CPLX_185,161,Liberty Av,Bk,8th Av - Fulton St
+CPLX_179,162,Nostrand Av,Bk,8th Av - Fulton St
+CPLX_182,163,Ralph Av,Bk,8th Av - Fulton St
+CPLX_183,164,Rockaway Av,Bk,8th Av - Fulton St
+CPLX_187,165,Shepherd Av,Bk,8th Av - Fulton St
+CPLX_181,166,Utica Av,Bk,8th Av - Fulton St
+CPLX_186,167,Van Siclen Av,Bk,8th Av - Fulton St
+CPLX_620,168,Court St,Bk,Broadway
+CPLX_41,169,7 Av,Bk,Broadway - Brighton
+CPLX_48,170,Avenue H,Bk,Broadway - Brighton
+CPLX_49,171,Avenue J,Bk,Broadway - Brighton
+CPLX_50,172,Avenue M,Bk,Broadway - Brighton
+CPLX_52,173,Avenue U,Bk,Broadway - Brighton
+CPLX_45,174,Beverley Rd,Bk,Broadway - Brighton
+CPLX_55,175,Brighton Beach,Bk,Broadway - Brighton
+CPLX_44,176,Church Av,Bk,Broadway - Brighton
+CPLX_46,177,Cortelyou Rd,Bk,Broadway - Brighton
+CPLX_26,178,DeKalb Av,Bk,Broadway - Brighton
+CPLX_51,179,Kings Hwy,Bk,Broadway - Brighton
+CPLX_53,180,Neck Rd,Bk,Broadway - Brighton
+CPLX_47,181,Newkirk Plaza,Bk,Broadway - Brighton
+CPLX_56,182,Ocean Pkwy,Bk,Broadway - Brighton
+CPLX_43,183,Parkside Av,Bk,Broadway - Brighton
+CPLX_42,184,Prospect Park,Bk,Broadway - Brighton
+CPLX_54,185,Sheepshead Bay,Bk,Broadway - Brighton
+CPLX_57,186,W 8 St-NY Aquarium,Bk,Broadway - Brighton
+CPLX_133,187,Atlantic Av,Bk,Canarsie
+CPLX_120,188,Bedford Av,Bk,Canarsie
+CPLX_131,189,Bushwick Av-Aberdeen St,Bk,Canarsie
+CPLX_138,190,Canarsie-Rockaway Pkwy,Bk,Canarsie
+CPLX_127,191,DeKalb Av,Bk,Canarsie
+CPLX_137,192,East 105 St,Bk,Canarsie
+CPLX_122,193,Graham Av,Bk,Canarsie
+CPLX_123,194,Grand St,Bk,Canarsie
+CPLX_126,195,Jefferson St,Bk,Canarsie
+CPLX_135,196,Livonia Av,Bk,Canarsie
+CPLX_629,197,Lorimer St,Bk,Canarsie
+CPLX_124,198,Montrose Av,Bk,Canarsie
+CPLX_125,199,Morgan Av,Bk,Canarsie
+CPLX_630,200,Myrtle-Wyckoff Avs,Bk,Canarsie
+CPLX_136,201,New Lots Av,Bk,Canarsie
+CPLX_134,202,Sutter Av,Bk,Canarsie
+CPLX_130,203,Wilson Av,Bk,Canarsie
+CPLX_334,204,Clark St,Bk,Clark St
+CPLX_289,205,Bedford-Nostrand Avs,Bk,Crosstown
+CPLX_286,206,Broadway,Bk,Crosstown
+CPLX_290,207,Classon Av,Bk,Crosstown
+CPLX_291,208,Clinton-Washington Avs,Bk,Crosstown
+CPLX_287,209,Flushing Av,Bk,Crosstown
+CPLX_292,210,Fulton St,Bk,Crosstown
+CPLX_283,211,Greenpoint Av,Bk,Crosstown
+CPLX_288,212,Myrtle-Willoughby Avs,Bk,Crosstown
+CPLX_284,213,Nassau Av,Bk,Crosstown
+CPLX_339,214,Bergen St,Bk,Eastern Pky
+CPLX_345,215,Crown Hts-Utica Av,Bk,Eastern Pky
+CPLX_341,216,Eastern Pkwy-Brooklyn Museum,Bk,Eastern Pky
+CPLX_626,217,Franklin Av-Medgar Evers College,Bk,Eastern Pky
+CPLX_340,218,Grand Army Plaza,Bk,Eastern Pky
+CPLX_336,219,Hoyt St,Bk,Eastern Pky
+CPLX_349,220,Junius St,Bk,Eastern Pky
+CPLX_344,221,Kingston Av,Bk,Eastern Pky
+CPLX_337,222,Nevins St,Bk,Eastern Pky
+CPLX_352,223,New Lots Av,Bk,Eastern Pky
+CPLX_343,224,Nostrand Av,Bk,Eastern Pky
+CPLX_350,225,Pennsylvania Av,Bk,Eastern Pky
+CPLX_348,226,Rockaway Av,Bk,Eastern Pky
+CPLX_347,227,Saratoga Av,Bk,Eastern Pky
+CPLX_346,228,Sutter Av-Rutland Rd,Bk,Eastern Pky
+CPLX_351,229,Van Siclen Av,Bk,Eastern Pky
+CPLX_141,230,Park Pl,Bk,Franklin Shuttle
+CPLX_91,231,Alabama Av,Bk,Jamaica
+CPLX_93,232,Chauncey St,Bk,Jamaica
+CPLX_89,233,Cleveland St,Bk,Jamaica
+CPLX_87,234,Crescent St,Bk,Jamaica
+CPLX_86,235,Cypress Hills,Bk,Jamaica
+CPLX_98,236,Flushing Av,Bk,Jamaica
+CPLX_95,237,Gates Av,Bk,Jamaica
+CPLX_94,238,Halsey St,Bk,Jamaica
+CPLX_100,239,Hewes St,Bk,Jamaica
+CPLX_96,240,Kosciuszko St,Bk,Jamaica
+CPLX_99,241,Lorimer St,Bk,Jamaica
+CPLX_101,242,Marcy Av,Bk,Jamaica
+CPLX_97,243,Myrtle Av,Bk,Jamaica
+CPLX_88,244,Norwood Av,Bk,Jamaica
+CPLX_90,245,Van Siclen Av,Bk,Jamaica
+CPLX_189,246,Grant Av,Bk,Liberty Av
+CPLX_114,247,Central Av,Bk,Myrtle Av
+CPLX_113,248,Knickerbocker Av,Bk,Myrtle Av
+CPLX_357,249,Beverly Rd,Bk,Nostrand
+CPLX_356,250,Church Av,Bk,Nostrand
+CPLX_359,251,Flatbush Av-Brooklyn College,Bk,Nostrand
+CPLX_358,252,Newkirk Av-Little Haiti,Bk,Nostrand
+CPLX_353,253,President St-Medgar Evers College,Bk,Nostrand
+CPLX_354,254,Sterling St,Bk,Nostrand
+CPLX_355,255,Winthrop St,Bk,Nostrand
+CPLX_74,256,18 Av,Bk,Sea Beach
+CPLX_75,257,20 Av,Bk,Sea Beach
+CPLX_71,258,8 Av,Bk,Sea Beach
+CPLX_79,259,86 St,Bk,Sea Beach
+CPLX_78,260,Avenue U,Bk,Sea Beach
+CPLX_76,261,Bay Pkwy,Bk,Sea Beach
+CPLX_72,262,Fort Hamilton Pkwy,Bk,Sea Beach
+CPLX_77,263,Kings Hwy,Bk,Sea Beach
+CPLX_615,264,New Utrecht Av,Bk,Sea Beach
+CPLX_58,265,Coney Island-Stillwell Av,Bk,Sea Beach / West End / Culver / Brighton
+CPLX_66,266,18 Av,Bk,West End
+CPLX_67,267,20 Av,Bk,West End
+CPLX_69,268,25 Av,Bk,West End
+CPLX_61,269,50 St,Bk,West End
+CPLX_62,270,55 St,Bk,West End
+CPLX_64,271,71 St,Bk,West End
+CPLX_65,272,79 St,Bk,West End
+CPLX_59,273,9 Av,Bk,West End
+CPLX_70,274,Bay 50 St,Bk,West End
+CPLX_68,275,Bay Pkwy,Bk,West End
+CPLX_60,276,Fort Hamilton Pkwy,Bk,West End
+CPLX_221,277,21 St-Queensbridge,Q,63rd St
+CPLX_3,278,30 Av,Q,Astoria
+CPLX_5,279,36 Av,Q,Astoria
+CPLX_6,280,39 Av-Dutch Kills,Q,Astoria
+CPLX_2,281,Astoria Blvd,Q,Astoria
+CPLX_1,282,Astoria-Ditmars Blvd,Q,Astoria
+CPLX_4,283,Broadway,Q,Astoria
+CPLX_461,284,Queensboro Plaza,Q,Astoria
+CPLX_129,285,Halsey St,Q,Canarsie
+CPLX_282,286,21 St,Q,Crosstown
+CPLX_606,287,Court Sq,Q,Crosstown
+CPLX_450,288,103 St-Corona Plaza,Q,Flushing
+CPLX_449,289,111 St,Q,Flushing
+CPLX_460,290,33 St-Rawson St,Q,Flushing
+CPLX_459,291,40 St-Lowery St,Q,Flushing
+CPLX_458,292,46 St-Bliss St,Q,Flushing
+CPLX_457,293,52 St,Q,Flushing
+CPLX_456,294,61 St-Woodside,Q,Flushing
+CPLX_455,295,69 St,Q,Flushing
+CPLX_616,296,74 St-Broadway,Q,Flushing
+CPLX_453,297,82 St-Jackson Hts,Q,Flushing
+CPLX_452,298,90 St-Elmhurst Av,Q,Flushing
+CPLX_447,299,Flushing-Main St,Q,Flushing
+CPLX_463,300,Hunters Point Av,Q,Flushing
+CPLX_451,301,Junction Blvd,Q,Flushing
+CPLX_448,302,Mets-Willets Point,Q,Flushing
+CPLX_464,303,Vernon Blvd-Jackson Av,Q,Flushing
+CPLX_82,304,104 St,Q,Jamaica
+CPLX_81,305,111 St,Q,Jamaica
+CPLX_80,306,121 St,Q,Jamaica
+CPLX_85,307,75 St-Elderts Ln,Q,Jamaica
+CPLX_84,308,85 St-Forest Pkwy,Q,Jamaica
+CPLX_83,309,Woodhaven Blvd,Q,Jamaica
+CPLX_193,310,104 St,Q,Liberty Av
+CPLX_194,311,111 St,Q,Liberty Av
+CPLX_190,312,80 St,Q,Liberty Av
+CPLX_191,313,88 St,Q,Liberty Av
+CPLX_195,314,Ozone Park-Lefferts Blvd,Q,Liberty Av
+CPLX_192,315,Rockaway Blvd,Q,Liberty Av
+CPLX_110,316,Forest Av,Q,Myrtle Av
+CPLX_109,317,Fresh Pond Rd,Q,Myrtle Av
+CPLX_108,318,Middle Village-Metropolitan Av,Q,Myrtle Av
+CPLX_111,319,Seneca Av,Q,Myrtle Av
+CPLX_278,320,Jamaica Center-Parsons/Archer,Q,Queens - Archer
+CPLX_280,321,Jamaica-Van Wyck,Q,Queens - Archer
+CPLX_279,322,Sutphin Blvd-Archer Av-JFK Airport,Q,Queens - Archer
+CPLX_255,323,169 St,Q,Queens Blvd
+CPLX_272,324,36 St,Q,Queens Blvd
+CPLX_270,325,46 St,Q,Queens Blvd
+CPLX_263,326,63 Dr-Rego Park,Q,Queens Blvd
+CPLX_268,327,65 St,Q,Queens Blvd
+CPLX_262,328,67 Av,Q,Queens Blvd
+CPLX_260,329,75 Av,Q,Queens Blvd
+CPLX_258,330,Briarwood,Q,Queens Blvd
+CPLX_266,331,Elmhurst Av,Q,Queens Blvd
+CPLX_261,332,Forest Hills-71 Av,Q,Queens Blvd
+CPLX_265,333,Grand Av-Newtown,Q,Queens Blvd
+CPLX_254,334,Jamaica-179 St,Q,Queens Blvd
+CPLX_259,335,Kew Gardens-Union Tpke,Q,Queens Blvd
+CPLX_269,336,Northern Blvd,Q,Queens Blvd
+CPLX_256,337,Parsons Blvd,Q,Queens Blvd
+CPLX_273,338,Queens Plaza,Q,Queens Blvd
+CPLX_271,339,Steinway St,Q,Queens Blvd
+CPLX_257,340,Sutphin Blvd,Q,Queens Blvd
+CPLX_264,341,Woodhaven Blvd,Q,Queens Blvd
+CPLX_196,342,Aqueduct Racetrack,Q,Rockaway
+CPLX_197,343,Aqueduct-N Conduit Av,Q,Rockaway
+CPLX_202,344,Beach 105 St,Q,Rockaway
+CPLX_208,345,Beach 25 St,Q,Rockaway
+CPLX_207,346,Beach 36 St,Q,Rockaway
+CPLX_206,347,Beach 44 St,Q,Rockaway
+CPLX_205,348,Beach 60 St,Q,Rockaway
+CPLX_204,349,Beach 67 St,Q,Rockaway
+CPLX_200,350,Beach 90 St,Q,Rockaway
+CPLX_201,351,Beach 98 St,Q,Rockaway
+CPLX_199,352,Broad Channel,Q,Rockaway
+CPLX_209,353,Far Rockaway-Mott Av,Q,Rockaway
+CPLX_198,354,Howard Beach-JFK Airport,Q,Rockaway
+CPLX_203,355,Rockaway Park-Beach 116 St,Q,Rockaway
+CPLX_295,356,231 St,Bx,Broadway - 7Av
+CPLX_294,357,238 St,Bx,Broadway - 7Av
+CPLX_293,358,Van Cortlandt Park-242 St,Bx,Broadway - 7Av
+CPLX_604,359,161 St-Yankee Stadium,Bx,Concourse
+CPLX_218,360,167 St,Bx,Concourse
+CPLX_217,361,170 St,Bx,Concourse
+CPLX_216,362,174-175 Sts,Bx,Concourse
+CPLX_214,363,182-183 Sts,Bx,Concourse
+CPLX_211,364,Bedford Park Blvd,Bx,Concourse
+CPLX_213,365,Fordham Rd,Bx,Concourse
+CPLX_212,366,Kingsbridge Rd,Bx,Concourse
+CPLX_210,367,Norwood-205 St,Bx,Concourse
+CPLX_215,368,Tremont Av,Bx,Concourse
+CPLX_443,369,Baychester Av,Bx,Dyre Av
+CPLX_442,370,Eastchester-Dyre Av,Bx,Dyre Av
+CPLX_444,371,Gun Hill Rd,Bx,Dyre Av
+CPLX_446,372,Morris Park,Bx,Dyre Av
+CPLX_445,373,Pelham Pkwy,Bx,Dyre Av
+CPLX_391,374,138 St-Grand Concourse,Bx,Jerome Av
+CPLX_603,375,149 St-Grand Concourse,Bx,Jerome Av
+CPLX_388,376,167 St,Bx,Jerome Av
+CPLX_387,377,170 St,Bx,Jerome Av
+CPLX_385,378,176 St,Bx,Jerome Av
+CPLX_383,379,183 St,Bx,Jerome Av
+CPLX_380,380,Bedford Park Blvd-Lehman College,Bx,Jerome Av
+CPLX_384,381,Burnside Av,Bx,Jerome Av
+CPLX_382,382,Fordham Rd,Bx,Jerome Av
+CPLX_381,383,Kingsbridge Rd,Bx,Jerome Av
+CPLX_379,384,Mosholu Pkwy,Bx,Jerome Av
+CPLX_386,385,Mt Eden Av,Bx,Jerome Av
+CPLX_378,386,Woodlawn,Bx,Jerome Av
+CPLX_428,387,174 St,Bx,Lenox - White Plains Rd
+CPLX_420,388,219 St,Bx,Lenox - White Plains Rd
+CPLX_419,389,225 St,Bx,Lenox - White Plains Rd
+CPLX_418,390,233 St,Bx,Lenox - White Plains Rd
+CPLX_434,391,3 Av-149 St,Bx,Lenox - White Plains Rd
+CPLX_423,392,Allerton Av,Bx,Lenox - White Plains Rd
+CPLX_425,393,Bronx Park East,Bx,Lenox - White Plains Rd
+CPLX_422,394,Burke Av,Bx,Lenox - White Plains Rd
+CPLX_426,395,E 180 St,Bx,Lenox - White Plains Rd
+CPLX_429,396,Freeman St,Bx,Lenox - White Plains Rd
+CPLX_421,397,Gun Hill Rd,Bx,Lenox - White Plains Rd
+CPLX_431,398,Intervale Av,Bx,Lenox - White Plains Rd
+CPLX_433,399,Jackson Av,Bx,Lenox - White Plains Rd
+CPLX_417,400,Nereid Av,Bx,Lenox - White Plains Rd
+CPLX_424,401,Pelham Pkwy,Bx,Lenox - White Plains Rd
+CPLX_432,402,Prospect Av,Bx,Lenox - White Plains Rd
+CPLX_430,403,Simpson St,Bx,Lenox - White Plains Rd
+CPLX_416,404,Wakefield-241 St,Bx,Lenox - White Plains Rd
+CPLX_427,405,West Farms Sq-E Tremont Av,Bx,Lenox - White Plains Rd
+CPLX_377,406,3 Av-138 St,Bx,Pelham
+CPLX_376,407,Brook Av,Bx,Pelham
+CPLX_361,408,Buhre Av,Bx,Pelham
+CPLX_365,409,Castle Hill Av,Bx,Pelham
+CPLX_375,410,Cypress Av,Bx,Pelham
+CPLX_374,411,E 143 St-St Mary's St,Bx,Pelham
+CPLX_373,412,E 149 St,Bx,Pelham
+CPLX_369,413,Elder Av,Bx,Pelham
+CPLX_371,414,Hunts Point Av,Bx,Pelham
+CPLX_372,415,Longwood Av,Bx,Pelham
+CPLX_362,416,Middletown Rd,Bx,Pelham
+CPLX_368,417,Morrison Av-Soundview,Bx,Pelham
+CPLX_366,418,Parkchester,Bx,Pelham
+CPLX_360,419,Pelham Bay Park,Bx,Pelham
+CPLX_367,420,St Lawrence Av,Bx,Pelham
+CPLX_363,421,Westchester Sq-E Tremont Av,Bx,Pelham
+CPLX_370,422,Whitlock Av,Bx,Pelham
+CPLX_364,423,Zerega Av,Bx,Pelham
