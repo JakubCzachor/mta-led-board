@@ -12,3 +12,7 @@ h2>=4.0.0  # HTTP/2 support for httpx (significant performance boost)
 
 # Serial communication (for ESP32)
 pyserial>=3.5
+
+# Web dashboard (optional)
+flask>=3.0.0
+flask-cors>=4.0.0

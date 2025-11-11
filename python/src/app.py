@@ -4,6 +4,7 @@ import asyncio
 import sys
 import os
 import logging
+import threading
 from typing import List
 
 # --- bootstrap so running as a script works ---
@@ -17,6 +18,7 @@ if __package__ is None or __package__ == "":
     from src.parsing import aggregate_states_from_blobs
     from src.render import build_led_payload, print_test_preview
     from src.serial_frame import frame_bytes, send_serial
+    from src.web_server import create_app, update_data
 else:
     # Running as module: use relative imports
     from .config import FEEDS, API_KEY
@@ -26,6 +28,7 @@ else:
     from .parsing import aggregate_states_from_blobs
     from .render import build_led_payload, print_test_preview
     from .serial_frame import frame_bytes, send_serial
+    from .web_server import create_app, update_data
 
 logger = logging.getLogger(__name__)
 
@@ -42,6 +45,9 @@ def main():
     ap.add_argument("--httpx", dest="use_httpx", action="store_true", default=True, help="Use httpx (HTTP/2)")
     ap.add_argument("--no-httpx", dest="use_httpx", action="store_false", help="Use requests (HTTP/1.1)")
     ap.add_argument("--verbose", action="store_true", help="Enable verbose logging")
+    ap.add_argument("--web", action="store_true", help="Enable web dashboard")
+    ap.add_argument("--web-host", default="127.0.0.1", help="Web server host")
+    ap.add_argument("--web-port", type=int, default=5000, help="Web server port")
     args = ap.parse_args()
 
     # Configure logging
@@ -66,6 +72,17 @@ def main():
     logger.info(f"Monitoring {len(feeds)} GTFS feeds")
     logger.info(f"Poll interval: {args.poll}s")
 
+    # Start web server in background thread if requested
+    if args.web:
+        app = create_app()
+        web_thread = threading.Thread(
+            target=lambda: app.run(host=args.web_host, port=args.web_port, debug=False, threaded=True),
+            daemon=True
+        )
+        web_thread.start()
+        logger.info(f"Web dashboard started at http://{args.web_host}:{args.web_port}")
+        logger.info("Press Ctrl+C to stop")
+
     while True:
         t0 = time.perf_counter()
 
@@ -89,6 +106,27 @@ def main():
         )
         pairs = build_led_payload(routes_by_station, mode_by_station, layout)
         payload = frame_bytes(pairs)
+
+        # Update web dashboard if enabled
+        if args.web:
+            # Count vehicles from blobs
+            vehicle_count = 0
+            from google.transit import gtfs_realtime_pb2 as gtfs
+            feed = gtfs.FeedMessage()
+            for blob in blobs:
+                try:
+                    feed.ParseFromString(blob)
+                    vehicle_count += sum(1 for e in feed.entity if e.HasField('vehicle'))
+                except:
+                    pass
+
+            update_data(
+                routes_by_station,
+                mode_by_station,
+                station_key_to_name,
+                layout,
+                vehicle_count
+            )
 
         t_ms = (time.perf_counter() - t0) * 1000.0
 
