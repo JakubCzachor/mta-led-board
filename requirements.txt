@@ -8,6 +8,7 @@ gtfs-realtime-bindings>=1.0.0
 # HTTP clients
 requests>=2.31.0
 httpx>=0.24.0
+h2>=4.0.0  # HTTP/2 support for httpx (significant performance boost)
 
 # Serial communication (for ESP32)
 pyserial>=3.5

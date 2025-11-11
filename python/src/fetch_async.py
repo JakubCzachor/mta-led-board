@@ -1,14 +1,26 @@
 from typing import List, Optional
 import asyncio
 import logging
+import time
 import httpx
-from src.config import TIMEOUT_CONNECT, TIMEOUT_READ
+
+try:
+    from .config import TIMEOUT_CONNECT, TIMEOUT_READ, FEED_CACHE_SECONDS
+except ImportError:
+    from src.config import TIMEOUT_CONNECT, TIMEOUT_READ, FEED_CACHE_SECONDS
 
 logger = logging.getLogger(__name__)
+
+# In-memory cache for GTFS feeds
+_feed_cache: Optional[List[bytes]] = None
+_cache_timestamp: float = 0.0
 
 
 async def fetch_parallel_httpx(feeds: List[str], api_key: Optional[str]) -> List[bytes]:
     """Fetch GTFS feeds in parallel using HTTP/2.
+
+    Uses in-memory caching to avoid redundant network requests.
+    Cache is valid for FEED_CACHE_SECONDS (default: 15s).
 
     Args:
         feeds: List of feed URLs
@@ -17,6 +29,15 @@ async def fetch_parallel_httpx(feeds: List[str], api_key: Optional[str]) -> List
     Returns:
         List of non-None blob responses
     """
+    global _feed_cache, _cache_timestamp
+
+    # Check if cache is still valid
+    now = time.time()
+    if _feed_cache and (now - _cache_timestamp) < FEED_CACHE_SECONDS:
+        age = now - _cache_timestamp
+        logger.info(f"Using cached feeds (age: {age:.1f}s)")
+        return _feed_cache
+
     headers = {
         "Accept-Encoding": "gzip, deflate",
         "User-Agent": "gtfs-led-board/2.0"
@@ -52,4 +73,9 @@ async def fetch_parallel_httpx(feeds: List[str], api_key: Optional[str]) -> List
 
     successful = [b for b in results if b is not None]
     logger.info(f"Successfully fetched {len(successful)}/{len(feeds)} feeds")
+
+    # Update cache
+    _feed_cache = successful
+    _cache_timestamp = time.time()
+
     return successful

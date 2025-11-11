@@ -1,8 +1,14 @@
 from typing import Dict, Tuple, Set, List
 import logging
+from collections import defaultdict
 from google.transit import gtfs_realtime_pb2 as gtfs
-from src.mapping import base_stop_id
-from src.config import MODE_OFF, MODE_SOLID, MODE_BLINK, MODE_PULSE
+
+try:
+    from .mapping import base_stop_id
+    from .config import MODE_OFF, MODE_SOLID, MODE_BLINK, MODE_PULSE
+except ImportError:
+    from src.mapping import base_stop_id
+    from src.config import MODE_OFF, MODE_SOLID, MODE_BLINK, MODE_PULSE
 
 logger = logging.getLogger(__name__)
 
@@ -27,7 +33,7 @@ def aggregate_states_from_blobs(
         - routes_by_station: Dict[station_key, Set[route_ids]]
         - mode_by_station: Dict[station_key, max_led_mode]
     """
-    routes_by_station: Dict[str, Set[str]] = {}
+    routes_by_station: Dict[str, Set[str]] = defaultdict(set)
     mode_by_station: Dict[str, int] = {}
     unknown_stops: Set[str] = set()
     parse_errors = 0
@@ -35,8 +41,6 @@ def aggregate_states_from_blobs(
 
     def add(sk: str, route: str, mode: int) -> None:
         """Update or create station state."""
-        if sk not in routes_by_station:
-            routes_by_station[sk] = set()
         if route:
             routes_by_station[sk].add(route)
         cur = mode_by_station.get(sk, MODE_OFF)

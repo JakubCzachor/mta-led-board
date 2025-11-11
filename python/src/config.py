@@ -19,6 +19,8 @@ API_KEY = os.getenv("MTA_API_KEY")
 TIMEOUT_CONNECT = 1.5
 TIMEOUT_READ = 4.0
 
+FEED_CACHE_SECONDS = 5 
+
 # LED modes
 class LEDMode(IntEnum):
     OFF = 0

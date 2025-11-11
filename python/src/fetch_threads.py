@@ -1,11 +1,20 @@
 from typing import List, Optional
 import logging
+import time
 import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
-from src.config import TIMEOUT_CONNECT, TIMEOUT_READ
+
+try:
+    from .config import TIMEOUT_CONNECT, TIMEOUT_READ, FEED_CACHE_SECONDS
+except ImportError:
+    from src.config import TIMEOUT_CONNECT, TIMEOUT_READ, FEED_CACHE_SECONDS
 
 logger = logging.getLogger(__name__)
+
+# In-memory cache for GTFS feeds
+_feed_cache: Optional[List[bytes]] = None
+_cache_timestamp: float = 0.0
 
 
 def build_requests_session(api_key: Optional[str]) -> requests.Session:
@@ -43,6 +52,9 @@ def build_requests_session(api_key: Optional[str]) -> requests.Session:
 def fetch_parallel_requests(feeds: List[str], api_key: Optional[str]) -> List[bytes]:
     """Fetch GTFS feeds in parallel using threaded requests.
 
+    Uses in-memory caching to avoid redundant network requests.
+    Cache is valid for FEED_CACHE_SECONDS (default: 15s).
+
     Args:
         feeds: List of feed URLs
         api_key: Optional API key
@@ -50,6 +62,15 @@ def fetch_parallel_requests(feeds: List[str], api_key: Optional[str]) -> List[by
     Returns:
         List of non-None blob responses
     """
+    global _feed_cache, _cache_timestamp
+
+    # Check if cache is still valid
+    now = time.time()
+    if _feed_cache and (now - _cache_timestamp) < FEED_CACHE_SECONDS:
+        age = now - _cache_timestamp
+        logger.info(f"Using cached feeds (age: {age:.1f}s)")
+        return _feed_cache
+
     from concurrent.futures import ThreadPoolExecutor, as_completed
 
     sess = build_requests_session(api_key)
@@ -83,4 +104,9 @@ def fetch_parallel_requests(feeds: List[str], api_key: Optional[str]) -> List[by
                 blobs.append(b)
 
     logger.info(f"Successfully fetched {len(blobs)}/{len(feeds)} feeds")
+
+    # Update cache
+    _feed_cache = blobs
+    _cache_timestamp = time.time()
+
     return blobs

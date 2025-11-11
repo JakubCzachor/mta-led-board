@@ -1,9 +1,15 @@
 from typing import Dict, Set, Tuple
 import logging
+import os
+import pickle
 import pandas as pd
 import numpy as np
 
 logger = logging.getLogger(__name__)
+
+# Cache file for station mappings (speeds up startup significantly)
+CACHE_DIR = ".cache"
+CACHE_FILE = os.path.join(CACHE_DIR, "station_mappings.pkl")
 
 
 def base_stop_id(sid: str) -> str:
@@ -29,6 +35,9 @@ def build_station_maps(stops_path: str, stations_csv: str) -> Tuple[Dict[str, st
     3. Merges them by base stop ID
     4. Assigns each stop to its parent (if exists) or complex (if exists)
 
+    Performance optimization: Caches the result to .cache/station_mappings.pkl
+    to avoid expensive pandas operations on every startup.
+
     Args:
         stops_path: Path to stops.txt (GTFS)
         stations_csv: Path to stations.csv (MTA)
@@ -36,6 +45,22 @@ def build_station_maps(stops_path: str, stations_csv: str) -> Tuple[Dict[str, st
     Returns:
         Tuple of (stopid_to_station_key, station_key_to_name, all_station_keys)
     """
+    # Check if cache exists and is newer than source files
+    if os.path.exists(CACHE_FILE):
+        try:
+            cache_mtime = os.path.getmtime(CACHE_FILE)
+            stops_mtime = os.path.getmtime(stops_path)
+            stations_mtime = os.path.getmtime(stations_csv)
+
+            if cache_mtime > stops_mtime and cache_mtime > stations_mtime:
+                logger.info("Loading station mappings from cache")
+                with open(CACHE_FILE, "rb") as f:
+                    cached = pickle.load(f)
+                logger.info(f"Loaded from cache: {len(cached[0])} stops → {len(cached[2])} stations")
+                return cached
+        except Exception as e:
+            logger.warning(f"Failed to load cache: {e}, rebuilding...")
+
     logger.info(f"Loading stops from {stops_path}")
     stops = pd.read_csv(stops_path, dtype=str)
     stops["stop_id"] = stops["stop_id"].str.upper()
@@ -74,6 +99,16 @@ def build_station_maps(stops_path: str, stations_csv: str) -> Tuple[Dict[str, st
     all_station_keys = set(station_key_to_name.keys())
 
     logger.info(f"Built mappings: {len(stopid_to_station_key)} stops → {len(all_station_keys)} stations")
+
+    # Save to cache for faster future startups
+    try:
+        os.makedirs(CACHE_DIR, exist_ok=True)
+        with open(CACHE_FILE, "wb") as f:
+            pickle.dump((stopid_to_station_key, station_key_to_name, all_station_keys), f)
+        logger.info(f"Saved station mappings to cache: {CACHE_FILE}")
+    except Exception as e:
+        logger.warning(f"Failed to save cache: {e}")
+
     return stopid_to_station_key, station_key_to_name, all_station_keys
 
 def load_layout(layout_path: str) -> Dict[str, int]:
