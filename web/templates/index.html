@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MTA LED Board - Live Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>NYC Subway Live Dashboard</h1>
+            <div class="status-bar">
+                <span id="status-indicator" class="status-ok">LIVE</span>
+                <span id="last-update">Connecting...</span>
+            </div>
+        </header>
+
+        <!-- Statistics Overview -->
+        <section class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value" id="stat-active-stations">-</div>
+                <div class="stat-label">Active Stations</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="stat-total-vehicles">-</div>
+                <div class="stat-label">Total Vehicles</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="stat-stopped">-</div>
+                <div class="stat-label">At Platform</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="stat-incoming">-</div>
+                <div class="stat-label">Arriving</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="stat-departing">-</div>
+                <div class="stat-label">Departing</div>
+            </div>
+        </section>
+
+        <!-- Search Section -->
+        <section class="search-section">
+            <input
+                type="text"
+                id="station-search"
+                placeholder="Search for a station (e.g., Times Square, 14 St, Grand Central)..."
+                autocomplete="off">
+            <div id="search-results" class="search-results hidden"></div>
+        </section>
+
+        <!-- Station Detail View -->
+        <section id="station-detail" class="station-detail hidden">
+            <button id="close-detail" class="close-btn">&times;</button>
+            <h2 id="detail-name"></h2>
+            <div id="detail-status" class="status-badge"></div>
+            <div id="detail-routes" class="route-list"></div>
+            <p id="detail-description" class="detail-description"></p>
+        </section>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="busiest">Busiest Stations</button>
+            <button class="tab-btn" data-tab="routes">Active Routes</button>
+            <button class="tab-btn" data-tab="all">All Active Stations</button>
+        </div>
+
+        <!-- Tab Content -->
+        <section class="tab-content">
+            <!-- Busiest Stations -->
+            <div id="tab-busiest" class="tab-pane active">
+                <div id="busiest-stations-list" class="station-list"></div>
+            </div>
+
+            <!-- Active Routes -->
+            <div id="tab-routes" class="tab-pane">
+                <div id="active-routes-list" class="route-stats-list"></div>
+            </div>
+
+            <!-- All Active Stations -->
+            <div id="tab-all" class="tab-pane">
+                <div id="all-stations-list" class="station-list"></div>
+            </div>
+        </section>
+    </div>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
