@@ -1,7 +1,12 @@
 from typing import Dict, Set, List, Tuple
 import logging
-from src.colors import choose_color_for_routes
-from src.config import MODE_SOLID, MODE_BLINK, MODE_PULSE
+
+try:
+    from .colors import choose_color_for_routes
+    from .config import MODE_SOLID, MODE_BLINK, MODE_PULSE
+except ImportError:
+    from src.colors import choose_color_for_routes
+    from src.config import MODE_SOLID, MODE_BLINK, MODE_PULSE
 
 logger = logging.getLogger(__name__)
 

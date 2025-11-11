@@ -6,27 +6,35 @@ import os
 import logging
 from typing import List
 
-# --- bootstrap so running as a script works (python src/app.py) ---
+# --- bootstrap so running as a script works ---
 if __package__ is None or __package__ == "":
-    # add repo root to sys.path so "src.*" absolute imports work
-    sys.path.append(os.path.dirname(os.path.dirname(__file__)))
-
-from src.config import FEEDS, API_KEY
-from src.mapping import build_station_maps, load_layout
-from src.fetch_async import fetch_parallel_httpx
-from src.fetch_threads import fetch_parallel_requests
-from src.parsing import aggregate_states_from_blobs
-from src.render import build_led_payload, print_test_preview
-from src.serial_frame import frame_bytes, send_serial
+    # Running as script: add parent to sys.path for "src.*" imports
+    sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
+    from src.config import FEEDS, API_KEY
+    from src.mapping import build_station_maps, load_layout
+    from src.fetch_async import fetch_parallel_httpx
+    from src.fetch_threads import fetch_parallel_requests
+    from src.parsing import aggregate_states_from_blobs
+    from src.render import build_led_payload, print_test_preview
+    from src.serial_frame import frame_bytes, send_serial
+else:
+    # Running as module: use relative imports
+    from .config import FEEDS, API_KEY
+    from .mapping import build_station_maps, load_layout
+    from .fetch_async import fetch_parallel_httpx
+    from .fetch_threads import fetch_parallel_requests
+    from .parsing import aggregate_states_from_blobs
+    from .render import build_led_payload, print_test_preview
+    from .serial_frame import frame_bytes, send_serial
 
 logger = logging.getLogger(__name__)
 
 
 def main():
     ap = argparse.ArgumentParser(description="MTA LED Board - Real-time NYC Subway visualization")
-    ap.add_argument("--stations", default="python/data/stations.csv", help="Path to stations.csv")
-    ap.add_argument("--stops", default="python/data/stops.txt", help="Path to stops.txt")
-    ap.add_argument("--layout", default="python/data/default_layout.csv", help="Path to layout CSV")
+    ap.add_argument("--stations", default="data/stations.csv", help="Path to stations.csv")
+    ap.add_argument("--stops", default="data/stops.txt", help="Path to stops.txt")
+    ap.add_argument("--layout", default="data/default_layout.csv", help="Path to layout CSV")
     ap.add_argument("--test", action="store_true", help="Test mode (console output)")
     ap.add_argument("--serial-port", default=None, help="Serial port for ESP32")
     ap.add_argument("--baud", type=int, default=2_000_000, help="Baud rate")
