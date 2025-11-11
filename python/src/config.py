@@ -19,7 +19,11 @@ API_KEY = os.getenv("MTA_API_KEY")
 TIMEOUT_CONNECT = 1.5
 TIMEOUT_READ = 4.0
 
-FEED_CACHE_SECONDS = 5 
+# Feed caching (in seconds)
+# MTA updates feeds approximately every 30 seconds
+# Lower values = more responsive but higher server load
+# Higher values = less server load but slower updates
+FEED_CACHE_SECONDS = 5
 
 # LED modes
 class LEDMode(IntEnum):
